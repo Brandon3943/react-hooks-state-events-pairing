@@ -1,8 +1,16 @@
+import React, { useState } from "react";
 import video from "../data/video.js";
+import Header from "./Header.js";
+import Comments from "./Comments.js";
 
 function App() {
-  console.log("Here's your data:", video);
+  const [hideComments, setHideComments] = useState(false)
 
+  function handleChange() {
+    setHideComments(prevState => !prevState)
+  }
+
+  
   return (
     <div className="App">
       <iframe
@@ -13,6 +21,9 @@ function App() {
         allowFullScreen
         title="Thinking in React"
       />
+
+      <Header videoData={video} handleChange={handleChange} hideComments={hideComments}/>
+      {hideComments ? null : <Comments video={video} />}
     </div>
   );
 }
